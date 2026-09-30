@@ -121,9 +121,7 @@ class RobotPathApp:
                 if cell == env.goal:
                     self.canvas.create_oval(x1 + 12, y1 + 12, x1 + 36, y1 + 36, fill="#35a854", outline="")
         rx, ry = self.robot.position
-        self.canvas.create_oval(ry * self.CELL + 10, rx * self.CELL + 10,
-                                ry * self.CELL + 38, rx * self.CELL + 38,
-                                fill="#2f80ed", outline="#174ea6", width=2)
+        self.draw_robot(ry * self.CELL, rx * self.CELL)
         self.status_var.set(
             f"Robot Status: {self.robot.status}\n\n"
             f"Current Position: ({rx}, {ry})\n\n"
@@ -131,3 +129,37 @@ class RobotPathApp:
             f"Learned Path Length: {max(0, self.robot.path.length - 1)}\n\n"
             f"Reward: {self.robot.session_reward}"
         )
+
+    def draw_robot(self, left, top):
+        """Draw a compact rover-style robot with canvas shapes."""
+        c = self.canvas
+        # Antenna gives the rover a clear robot silhouette.
+        c.create_line(left + 24, top + 7, left + 24, top + 3, fill="#26364a", width=2)
+        c.create_oval(left + 21, top + 1, left + 27, top + 7,
+                      fill="#48d7ff", outline="#26364a")
+
+        # Body: overlapping ovals make a compact rounded rover without images.
+        c.create_oval(left + 9, top + 18, left + 39, top + 39,
+                      fill="#2469a8", outline="#173a5e", width=2)
+        c.create_rectangle(left + 10, top + 24, left + 38, top + 32,
+                           fill="#2469a8", outline="")
+        c.create_oval(left + 11, top + 7, left + 37, top + 29,
+                      fill="#dceeff", outline="#173a5e", width=2)
+
+        # Dark display face and bright eyes make the robot visible on every cell colour.
+        c.create_oval(left + 15, top + 11, left + 33, top + 23,
+                      fill="#173a5e", outline="")
+        c.create_oval(left + 18, top + 14, left + 22, top + 18,
+                      fill="#56e0ff", outline="")
+        c.create_oval(left + 26, top + 14, left + 30, top + 18,
+                      fill="#56e0ff", outline="")
+        c.create_line(left + 21, top + 21, left + 27, top + 21,
+                      fill="#8be9ff", width=1)
+
+        # Two small dark tracks make it read as a rover rather than a person.
+        c.create_oval(left + 8, top + 29, left + 15, top + 39,
+                      fill="#26364a", outline="#142438")
+        c.create_oval(left + 33, top + 29, left + 40, top + 39,
+                      fill="#26364a", outline="#142438")
+        c.create_rectangle(left + 17, top + 31, left + 31, top + 35,
+                           fill="#65b9ee", outline="")
