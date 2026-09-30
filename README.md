@@ -16,8 +16,7 @@
 - [Rewards](#rewards)
 - [Non-Iterative Learning](#non-iterative-learning)
 - [Complexity](#complexity)
-- [Limitations and Future Work](#limitations-and-future-work)
-- [Possible Viva Questions](#possible-viva-questions)
+
 
 ---
 
@@ -189,13 +188,4 @@ Let **V** be the number of reachable grid cells.
 | Overall worst case | `O(V²)` | Backtracking may repeatedly traverse the route |
 | Space | `O(V)` | Visited set and path nodes |
 
-## Limitations and Future Work
-
-### Limitations
-
-- The fixed direction order does not guarantee the shortest route.
-- Random grids can have unreachable goals.
-- The simulation has no sensor noise, uncertainty, or physical movement constraints.
-- A singly linked list makes tail removal slower than a doubly linked list.
----
 
